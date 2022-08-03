@@ -29,5 +29,7 @@ git clone https://github.com/airshaper/openfoam-convergence-detection-tutorial.g
 4. Execute
 
 ```shell
+# Allrun script will clone https://github.com/airshaper/openfoam-convergence-detection
+# and run wmake -j to compile functionObject so it can be used in simpleFoam
 ./Allrun
 ```
