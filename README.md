@@ -2,6 +2,8 @@
 
 ## How to run convergence detection tutorial
 
+[OpenFoam Convergence Detection Repository](https://github.com/airshaper/openfoam-convergence-detection)
+
 1. Install OpenFoam
 
 ```shell
@@ -22,7 +24,7 @@ git clone https://github.com/airshaper/openfoam-convergence-detection-tutorial.g
 
 3. Adjust number of cores in `/system/decomposeParDict`
 
-4. Execute 
+4. Execute
 
 ```shell
 ./Allrun
