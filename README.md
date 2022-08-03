@@ -2,7 +2,7 @@
 
 ## How to run convergence detection tutorial
 
-Source coude is locatated at the link below:
+Source code is locatated at the link below:
 
 [OpenFoam Convergence Detection Repository](https://github.com/airshaper/openfoam-convergence-detection)
 
