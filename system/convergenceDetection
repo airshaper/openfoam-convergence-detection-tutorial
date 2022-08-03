@@ -1,0 +1,40 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2206                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+
+convergenceDetection1
+{
+    libs (libconvergenceDetection);
+    type convergenceDetection;
+
+    // default settings
+    // windowNormalization 0.5;
+    // windowGradient 0.5;
+    // windowGradientAveraging 0.99;
+    // windowEvaluation 0.333;
+    // windowEvaluationAveraging 0.333;
+    // thresholdConvergence 0.075;
+    // thresholdAveraging 0.025;
+    // iterationMaxConvergence 4000;
+    // iterationMaxAveraging 2000;
+    // iterationMinConvergence 200;
+    // iterationMinAveraging 200;
+    // forceStabilityFactor 2;
+
+    // forces - required
+    // modify according to your case
+    patches         ( motorBikeGroup );
+    rho             rhoInf;
+    rhoInf          1.225; // for water 1000
+    CofR            ( 0 0 0 );
+    // end of forces  - required
+
+    writeControl    timeStep;
+    timeInterval    1;
+ }
+
+// ************************************************************************* //

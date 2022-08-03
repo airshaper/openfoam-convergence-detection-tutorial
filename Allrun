@@ -1,0 +1,55 @@
+#!/bin/sh
+cd "${0%/*}" || exit                                # Run from this directory
+. ${WM_PROJECT_DIR:?}/bin/tools/RunFunctions        # Tutorial run functions
+#------------------------------------------------------------------------------
+
+# copy motorbike surface from resources directory
+mkdir -p constant/triSurface
+
+cp -f \
+    "$FOAM_TUTORIALS"/resources/geometry/motorBike.obj.gz \
+    constant/triSurface/
+
+if [ ! -d "openfoam-convergence-detection" ] ; then
+    git clone https://github.com/airshaper/openfoam-convergence-detection.git
+fi
+
+wmake -j openfoam-convergence-detection
+
+runApplication surfaceFeatureExtract
+
+runApplication blockMesh
+
+runApplication decomposePar
+
+# Using distributedTriSurfaceMesh?
+if foamDictionary -entry geometry -value system/snappyHexMeshDict | \
+   grep -q distributedTriSurfaceMesh
+then
+    echo "surfaceRedistributePar does not need to be run anymore"
+    echo " - distributedTriSurfaceMesh will do on-the-fly redistribution"
+fi
+
+runParallel snappyHexMesh -overwrite
+
+runParallel topoSet
+
+#- For non-parallel running: - set the initial fields
+# restore0Dir
+
+#- For parallel running: set the initial fields
+restore0Dir -processor
+
+runParallel patchSummary
+
+runParallel potentialFoam -writephi
+
+runParallel checkMesh -writeFields '(nonOrthoAngle)' -constant
+
+runParallel $(getApplication)
+
+runApplication reconstructParMesh -constant
+
+runApplication reconstructPar -latestTime
+
+#------------------------------------------------------------------------------
