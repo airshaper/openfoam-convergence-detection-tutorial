@@ -2,6 +2,8 @@
 
 ## How to run convergence detection tutorial
 
+Source coude is locatated at the link below:
+
 [OpenFoam Convergence Detection Repository](https://github.com/airshaper/openfoam-convergence-detection)
 
 1. Install OpenFoam
